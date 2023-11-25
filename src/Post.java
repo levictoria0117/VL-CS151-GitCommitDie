@@ -5,27 +5,35 @@ public class Post{
     private String date;
     private String time;
     private int postID;
+    private int karma;
     private ArrayList<String> comments = new ArrayList<>();
 
     public void setUser(User user)      { this.user = user; }
     public void setDate(String date)    { this.date = date; }
     public void setTime(String time)    { this.time = time; }
     public void setPostID(int postID)   { this.postID = postID; }
+    public void setKarma (int karma)    { this.karma = karma; }
 
     public User getUser()               { return user; }
     public String getDate()             { return date; }
     public String getTime()             { return time; }
     public int getPostID()              { return postID; }
+    public int getKarma()               { return karma; }
 
     public ArrayList<String> getComments() { return comments;}
 
     void deletePost(ArrayList list, int index){ list.remove(index); }
-    void setInfo(Post p, User user, int id, String date, String time){
+    void setInfo(Post p, User user, int id, String date, String time, int karma){
         p.setUser(user);
         p.setDate(date);
         p.setTime(time);
         p.setPostID(id);
+        p.setKarma(karma);
+        this.user.addAssociatedPost(this); //Associates post with user once setInfo is called
     }
+
+    void incrementKarma(){ karma++; }
+    void decrementKarma(){ karma--; }
 }
 
 /**import java.util.ArrayList;
